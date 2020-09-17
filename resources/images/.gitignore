@@ -1,0 +1,7 @@
+#ignore folders in progress
+/Chess Pieces
+/Shogi Pieces (Modified)
+/Shogi Pieces (Original)
+
+#ignore files in progress
+Pieces.pdn
