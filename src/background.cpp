@@ -3,7 +3,7 @@
 
 class Background : public sf::Drawable, public sf::Transformable {
 public:
-	bool load(const std::string& tileset, sf::Vector2u tileSize, const std::string& tiles, unsigned int width, unsigned int height) {
+	bool load(const std::string& tileset, sf::Vector2u tileSize, const std::string& tiles, unsigned int width, unsigned int height, sf::Vector2u offset) {
 		//Load the tileset texture
 		if (!m_tileset.loadFromFile(tileset))
 			return false;
@@ -26,10 +26,10 @@ public:
 				sf::Vertex* quad = &m_vertices[(x + y * width) * 4];
 
 				//define its 4 corners
-				quad[0].position = sf::Vector2f(x * tileSize.x, y * tileSize.y);
-				quad[1].position = sf::Vector2f((x + 1) * tileSize.x, y * tileSize.y);
-				quad[2].position = sf::Vector2f((x + 1) * tileSize.x, (y + 1) * tileSize.y);
-				quad[3].position = sf::Vector2f(x * tileSize.x, (y + 1) * tileSize.y);
+				quad[0].position = sf::Vector2f(x * tileSize.x + offset.x, y * tileSize.y + offset.y);
+				quad[1].position = sf::Vector2f((x + 1) * tileSize.x + offset.x, y * tileSize.y + offset.y);
+				quad[2].position = sf::Vector2f((x + 1) * tileSize.x + offset.x, (y + 1) * tileSize.y + offset.y);
+				quad[3].position = sf::Vector2f(x * tileSize.x + offset.x, (y + 1) * tileSize.y + offset.y);
 
 				//define its 4 texture coordinates
 				quad[0].texCoords = sf::Vector2f(tu * tileSize.x, tv * tileSize.y);

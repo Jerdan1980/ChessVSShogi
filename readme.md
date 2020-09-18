@@ -8,9 +8,15 @@
 3. copy/paste the dll files from SFML/bin to the /build folder
 4. run `./build/app.exe`
 
-# Piece Representation
+# Tilemaps
+## Board
+- 0 Background Tile
+- 1 Light Tile
+- 2 Dark Tile
+
+## Piece Representation
 Negative number means the piece is flipped vertically
-- 00 Blank
+- 00 Blank (Transparent)
 - 1X White Chess Pieces
 	- 10 King
 	- 11 Queen
@@ -41,3 +47,9 @@ Negative number means the piece is flipped vertically
 	- 45 Promoted Knight
 	- 46 Promoted Lance
 	- 47 promoted Pawn
+
+## Highlights
+- 0 Blank (Transparent)
+- 1 Non-Capture Selector
+- 3 Capture Selector
+- 4 Promote Selector
