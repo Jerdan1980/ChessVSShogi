@@ -23,7 +23,7 @@ int main() {
 		return -1;	
 	
 	//get the pieces
-	const int board[] = 
+	int board[] = 
 	{
 		+22, +24, +23, +21, +20, +23, +24, +22, +00,
 		+25, +25, +25, +25, +25, +25, +25, +25, +00,
@@ -35,6 +35,9 @@ int main() {
 		+00, +32, +00, +00, +00, +00, +00, +31, +00,
 		+36, +35, +34, +33, +30, +33, +34, +35, +36
 	};
+	for (unsigned int i = 0; i < sizeof(board)/sizeof(board[0]); i++) {
+		board[i] *= -1;
+	}
 	BoardMap boardMap;
 	if (!boardMap.load("../resources/images/Pieces.png", sf::Vector2u(45, 45), board, 9, 9, sf::Vector2u(5 * 45, 45)))
 		return -1;

@@ -2,4 +2,4 @@ SFMLDIR = D:/Programs/SFML-2.5.1
 SFML = -I$(SFMLDIR)/include -L$(SFMLDIR)/lib -lsfml-system -lsfml-window -lsfml-graphics 
 
 main: 
-	g++ -o ./build/app ./src/test.cpp $(SFML)
+	g++ -Wall -o ./build/app ./src/test.cpp $(SFML)
