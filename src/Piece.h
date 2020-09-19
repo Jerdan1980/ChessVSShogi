@@ -29,9 +29,11 @@ class Queen: public Piece {
 };
 
 class Pawn: public Piece {
+    bool moved = false;
     
     public:
-    Pawn(bool white, bool shogi) : Piece(white, shogi+3, 100, 16) {};
+    Pawn(bool white, bool shogi) : Piece(white, shogi+3, 110, 16) {};
+    bool validMove(int move, int cur[], int to[], bool haspiece);
 };
 
 class Lance: public Piece {
@@ -50,12 +52,14 @@ class SilverG: public Piece {
     
     public:
     SilverG(bool white) : Piece(white, 2, 110, 20) {};
+    bool validMove(int move, int curr[], int to[]);
 };
 
-class GoldG: public Piece {
+class GoldG: public Piece { 
 
     public:
     GoldG(bool white) : Piece(white, 2, 110, 21) {};
+    bool validMove(int move, int curr[], int to[]);
 };
 
 class Bishop: public Piece {
