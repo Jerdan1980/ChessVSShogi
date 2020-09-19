@@ -4,6 +4,7 @@
 #include <vector>
 #include "TileMaps.cpp"
 #include "Piece.h"
+#include "BoardConstructor.cpp"
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(855,495), "SFML works!");
@@ -40,12 +41,13 @@ int main() {
 		+00, +32, +00, +00, +00, +00, +00, +31, +00,
 		+36, +35, +34, +33, +30, +33, +34, +35, +36
 	};
+	//board constructor
+	std::vector<Piece> pieces = createBoard();
 	PieceMap boardMap;
-	if (!boardMap.load("../resources/images/Pieces.png", sf::Vector2u(45, 45), board, 9, 9, sf::Vector2u(5 * 45, 45)))
+	if (!boardMap.load("../resources/images/Pieces.png", sf::Vector2u(45, 45), pieces, 9, 9, sf::Vector2u(5 * 45, 45)))
 		return -1;
 
 	//highlighting
-	//create the background
 	std::string high = "00000000000000000" +
 				(std::string)"00000000000200000" +
 				(std::string)"00000000001000000" +
@@ -86,7 +88,7 @@ int main() {
 
 		//update tilemaps
 		if (redraw) {
-			boardMap.load("../resources/images/Pieces.png", sf::Vector2u(45, 45), board, 9, 9, sf::Vector2u(5 * 45, 45));
+			boardMap.load("../resources/images/Pieces.png", sf::Vector2u(45, 45), pieces, 9, 9, sf::Vector2u(5 * 45, 45));
 			highMap.load("../resources/images/Highlights.png", sf::Vector2u(45, 45), high, 17, 9, sf::Vector2u(45, 45));
 			redraw = false;
 		}

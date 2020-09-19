@@ -1,0 +1,28 @@
+PieceNumber TileMap Piece
+00          00      Blank
+10          10      WBishop
+10          11      BBishop
+11          12      Bishop
+11          13      Promoted Bishop
+12          14      WKnight
+12          15      BKngiht
+13          16      Knight
+13          17      Promoted Knight
+14          18      WRook
+14          19      BRook
+15          20      Rook
+15          21      Promoted Rook
+16          22      WPawn
+16          23      BPawn
+17          24      Pawn
+17          25      Promoted Pawn
+18          26      WQueen
+18          27      BQueen
+19          28      Lance
+19          29      Promoted Lance
+20          30      Silver General
+20          31      Promoted Silver General
+21          32      Gold General
+21          33      WKing
+21          34      BKing
+23          35      King (wont differientate between the two versions)

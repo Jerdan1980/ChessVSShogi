@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <vector>
 #include "Piece.h"
 
 class TiledMap : public sf::Drawable, public sf::Transformable {
@@ -59,7 +60,7 @@ private:
 
 class PieceMap : public sf::Drawable, public sf::Transformable {
 public:
-	bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height, sf::Vector2u offset) {
+	bool load(const std::string& tileset, sf::Vector2u tileSize, std::vector<Piece> pieces, unsigned int width, unsigned int height, sf::Vector2u offset) {
 		//load the tileset texture
 		if(!m_tileset.loadFromFile(tileset))
 			return false;
@@ -72,7 +73,7 @@ public:
 		for (unsigned int x = 0; x < width; x++) {
 			for (unsigned int y = 0; y < height; y++) {
 				//get the current tile number
-				int tileNumber = abs(tiles[x + y * width]);
+				int tileNumber = pieces[x + y * width].getTilemap();
 
 				//find its position in the tileset texture
 				int tx = tileNumber % 10;
@@ -88,7 +89,7 @@ public:
 				quad[3].position = sf::Vector2f(x * tileSize.x + offset.x, (y + 1) * tileSize.y + offset.y);
 
 				//define its 4 texture coords
-				bool flip = tiles[x + y * width] < 0;
+				bool flip = false; //tiles[x + y * width] < 0;
 				quad[flip ? 2 : 0].texCoords = sf::Vector2f(tx * tileSize.x, ty * tileSize.y);
 				quad[flip ? 3 : 1].texCoords = sf::Vector2f((tx + 1) * tileSize.x, ty * tileSize.y);
 				quad[flip ? 0 : 2].texCoords = sf::Vector2f((tx + 1) * tileSize.x, (ty + 1) * tileSize.y);
