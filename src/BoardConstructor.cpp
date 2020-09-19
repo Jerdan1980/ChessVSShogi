@@ -2,22 +2,15 @@
 #include <vector>
 
 
-std::vector<Piece> createBoard() {
-	std::vector<Piece> pieces;
-	Piece* temp;
+void createBoard(std::vector<Piece*> &pieces) {
 	for (int i = 0; i < 4; i++) {
-		temp = new Rook(1, 0);
-		pieces.push_back(*temp);
-		temp = new Bishop(1, 0);
-		pieces.push_back(*temp);
+		pieces.push_back(new Rook(1, 0));
+		pieces.push_back(new Bishop(1, 0));
 	}
-	temp = new Queen(1);
-	pieces.push_back(*temp);
+	pieces.push_back(new Queen(1));
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 9; j++) {
-			temp = new Piece();
-			pieces.push_back(*temp);
+			pieces.push_back(new Piece());
 		}
 	}
-	return pieces;
 }

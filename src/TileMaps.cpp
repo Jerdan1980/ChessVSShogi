@@ -1,7 +1,7 @@
+#include "Piece.h"
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
-#include "Piece.h"
 
 class TiledMap : public sf::Drawable, public sf::Transformable {
 public:
@@ -60,7 +60,7 @@ private:
 
 class PieceMap : public sf::Drawable, public sf::Transformable {
 public:
-	bool load(const std::string& tileset, sf::Vector2u tileSize, std::vector<Piece> pieces, unsigned int width, unsigned int height, sf::Vector2u offset) {
+	bool load(const std::string& tileset, sf::Vector2u tileSize, std::vector<Piece*> &pieces, unsigned int width, unsigned int height, sf::Vector2u offset) {
 		//load the tileset texture
 		if(!m_tileset.loadFromFile(tileset))
 			return false;
@@ -73,7 +73,7 @@ public:
 		for (unsigned int x = 0; x < width; x++) {
 			for (unsigned int y = 0; y < height; y++) {
 				//get the current tile number
-				int tileNumber = pieces[x + y * width].getTilemap();
+				int tileNumber = pieces[x + y * width]->getTilemap();
 
 				//find its position in the tileset texture
 				int tx = tileNumber % 10;

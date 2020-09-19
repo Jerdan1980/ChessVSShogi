@@ -1,9 +1,9 @@
+#include "Piece.h"
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
 #include <vector>
 #include "TileMaps.cpp"
-#include "Piece.h"
 #include "BoardConstructor.cpp"
 
 int main() {
@@ -29,20 +29,9 @@ int main() {
 		return -1;	
 	
 	//get the pieces
-	int board[] = 
-	{
-		+22, +24, +23, +21, +20, +23, +24, +00, +22,
-		+25, +25, +25, +25, +25, +25, +25, +25, +00,
-		+00, +00, +00, +00, +00, +00, +00, +00, +00,
-		+00, +00, +00, +00, +00, +00, +00, +00, +00,
-		+00, +00, +00, +00, +00, +00, +00, +00, +00,
-		+00, +00, +37, +00, +00, +00, +00, +00, +00,
-		+37, +37, +00, +37, +37, +37, +37, +37, +37,
-		+00, +32, +00, +00, +00, +00, +00, +31, +00,
-		+36, +35, +34, +33, +30, +33, +34, +35, +36
-	};
 	//board constructor
-	std::vector<Piece> pieces = createBoard();
+	std::vector<Piece*> pieces;
+	createBoard(pieces);
 	PieceMap boardMap;
 	if (!boardMap.load("../resources/images/Pieces.png", sf::Vector2u(45, 45), pieces, 9, 9, sf::Vector2u(5 * 45, 45)))
 		return -1;
