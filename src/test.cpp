@@ -1,8 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
-#include "background.cpp"
-#include "boardmap.cpp"
+#include <vector>
+#include "TileMaps.cpp"
+#include "Piece.h"
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(855,495), "SFML works!");
@@ -22,7 +23,7 @@ int main() {
 						(std::string)"0111021212121200000" +
 						(std::string)"0111012121212100000" +
 						(std::string)"0000000000000000000";
-	Background bgMap;
+	TiledMap bgMap;
 	if (!bgMap.load("../resources/images/Board.png", sf::Vector2u(45, 45), bg, 19, 11, sf::Vector2u(0,0)))
 		return -1;	
 	
@@ -39,10 +40,7 @@ int main() {
 		+00, +32, +00, +00, +00, +00, +00, +31, +00,
 		+36, +35, +34, +33, +30, +33, +34, +35, +36
 	};
-	for (unsigned int i = 0; i < sizeof(board)/sizeof(board[0])/2; i++) {
-		board[i] *= -1;
-	}
-	BoardMap boardMap;
+	PieceMap boardMap;
 	if (!boardMap.load("../resources/images/Pieces.png", sf::Vector2u(45, 45), board, 9, 9, sf::Vector2u(5 * 45, 45)))
 		return -1;
 
@@ -57,7 +55,7 @@ int main() {
 				(std::string)"00000010000000000" +
 				(std::string)"00000100000000000" +
 				(std::string)"00000000000000000";
-	Background highMap;
+	TiledMap highMap;
 	if (!highMap.load("../resources/images/Highlights.png", sf::Vector2u(45, 45), high, 17, 9, sf::Vector2u(45, 45)))
 		return -1;	
 
