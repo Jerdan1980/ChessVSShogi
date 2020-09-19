@@ -1,65 +1,79 @@
+#pragma once
+using namespace std;
 
 class Piece{
+    protected:
     int number = 0;
     bool white = true;
+    int movement = 0;
+    bool promoted = false;
+    bool shogi = false;
 
-    public:
+    public:    
+    Piece();
+    Piece(bool white, int type, int movement, int number);
+    int getTilemap();
     int getNumber();
+    int getShogi();
+    int getMovement();
+    bool getWhite();
+    bool getPromoted();
+    bool validMove(int move, int curr[], int to[]);
 
 };
 
-class pawn: public Piece {
-    int number = 37;
+class Queen: public Piece {
 
     public:
-    pawn(bool white);
+    Queen(bool white) : Piece(white, 1, 110, 18) {};
 };
 
-class lance: public Piece {
-    int number = 37;
-
+class Pawn: public Piece {
+    
     public:
-    lance(bool white);
+    Pawn(bool white, bool shogi) : Piece(white, shogi+3, 100, 16) {};
 };
 
-class knight: public Piece {
-    int number = 37;
+class Lance: public Piece {
 
     public:
-    knight(bool white);
+    Lance(bool white) : Piece(white, 2, 100, 19) {};
 };
 
-class silverG: public Piece {
-    int number = 37;
+class Knight: public Piece {
 
     public:
-    silverG(bool white);
+    Knight(bool white, bool shogi) : Piece(white, shogi+3, 1, 12) {};
 };
 
-class goldG: public Piece {
-    int number = 37;
-
+class SilverG: public Piece {
+    
     public:
-    goldG(bool white);
+    SilverG(bool white) : Piece(white, 2, 110, 20) {};
 };
 
-class bishop: public Piece {
-    int number = 37;
+class GoldG: public Piece {
 
     public:
-    bishop(bool white);
+    GoldG(bool white) : Piece(white, 2, 110, 21) {};
 };
 
-class rook: public Piece {
-    int number = 37;
-
+class Bishop: public Piece {
+    
     public:
-    rook(bool white);
+    Bishop(bool white, bool shogi) : Piece(white, shogi+3, 10, 10) {};
+    bool validMove(int move, int curr[], int to[]);
 };
 
-class king: public Piece {
-    int number = 37;
+class Rook: public Piece {
 
     public:
-    king(bool white);
+    Rook(bool white, bool shogi) : Piece(white, shogi+3, 100, 14) {};
+    bool validMove(int move, int curr[], int to[]);
+};
+
+class King: public Piece {
+
+    public:
+    King(bool white, bool shogi) : Piece(white, shogi+3, 110, 21) {};
 };
