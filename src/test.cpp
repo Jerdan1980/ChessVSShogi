@@ -1,10 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <iostream>
 #include "background.cpp"
 #include "boardmap.cpp"
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(855,495), "SFML works!");
+	
+	//set a bool to redraw
+	bool redraw = true;
 
 	//create the background
 	const std::string bg = "0000000000000000000" +
@@ -44,15 +48,15 @@ int main() {
 
 	//highlighting
 	//create the background
-	const std::string high = "00000000000000000" +
-							(std::string)"00000000000200000" +
-							(std::string)"00000000001000000" +
-							(std::string)"00000000010000000" +
-							(std::string)"00000000100000000" +
-							(std::string)"00000001000000000" +
-							(std::string)"00000010000000000" +
-							(std::string)"00000100000000000" +
-							(std::string)"00000000000000000";
+	std::string high = "00000000000000000" +
+				(std::string)"00000000000200000" +
+				(std::string)"00000000001000000" +
+				(std::string)"00000000010000000" +
+				(std::string)"00000000100000000" +
+				(std::string)"00000001000000000" +
+				(std::string)"00000010000000000" +
+				(std::string)"00000100000000000" +
+				(std::string)"00000000000000000";
 	Background highMap;
 	if (!highMap.load("../resources/images/Highlights.png", sf::Vector2u(45, 45), high, 17, 9, sf::Vector2u(45, 45)))
 		return -1;	
@@ -60,15 +64,41 @@ int main() {
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed)
-			window.close();
+			switch (event.type) {
+				//check if closed window
+				case sf::Event::Closed:
+					window.close();
+					break;
+				
+				//check if you selected something
+				case sf::Event::MouseButtonPressed:
+					if (event.mouseButton.button == sf::Mouse::Left) {
+						//get mouse position
+						sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+						//get corresponding tile
+						sf::Vector2i tile = (localPosition - sf::Vector2i(45, 45)) / 45;
+						//mock update (toggle between modes)
+						high[tile.x + tile.y * 17] = "012"[((high[tile.x + tile.y * 17] - '0') + 1) % 3];
+						//slate tilemaps to be updated
+						redraw = true;
+					}
+					break;
+			}
 		}
 
+		//update tilemaps
+		if (redraw) {
+			boardMap.load("../resources/images/Pieces.png", sf::Vector2u(45, 45), board, 9, 9, sf::Vector2u(5 * 45, 45));
+			highMap.load("../resources/images/Highlights.png", sf::Vector2u(45, 45), high, 17, 9, sf::Vector2u(45, 45));
+			redraw = false;
+		}
+
+		//draw everything
 		window.clear();
 		window.draw(bgMap);
 		window.draw(boardMap);
 		window.draw(highMap);
-		window.display();
+		window.display();		
 	}
 
 	return 0;
