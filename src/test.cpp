@@ -7,7 +7,7 @@
 #include "BoardConstructor.cpp"
 
 int main() {
-  sf::RenderWindow window(sf::VideoMode(19 * 45, 12 * 45), "SFML works!");
+  sf::RenderWindow window(sf::VideoMode(19 * 45, 12 * 45), "Chess vs Shogi");
 	
 	//set a bool to redraw
 	bool redraw = true;
@@ -67,9 +67,11 @@ int main() {
 						//get mouse position
 						sf::Vector2i localPosition = sf::Mouse::getPosition(window);
 						//get corresponding tile
-						sf::Vector2i tile = (localPosition - sf::Vector2i(0, 45)) / 45;
+						sf::Vector2i tile = (localPosition - highMap.getOffset(true)) / 45;
+						std::cout << "Offset: " << highMap.getOffset(true).x << " " << highMap.getOffset(true).y << "\n";
 						//mock update (toggle between modes)
-						high[tile.x + tile.y * 19] = "012"[((high[tile.x + tile.y * 19] - '0') + 1) % 3];
+						std::cout << "Width: " << highMap.getWidth() << "\n";
+						high[tile.x + tile.y * highMap.getWidth()] = "012"[((high[tile.x + tile.y * highMap.getWidth()] - '0') + 1) % 3];
 						//slate tilemaps to be updated
 						redraw = true;
 					}

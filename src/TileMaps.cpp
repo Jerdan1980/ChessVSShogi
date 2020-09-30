@@ -52,6 +52,19 @@ bool TiledMap::update(const std::string& tiles) {
 	return true;
 }
 
+unsigned int TiledMap::getWidth() {
+	return width;
+}
+unsigned int TiledMap::getHeight() {
+	return height;
+}
+sf::Vector2i TiledMap::getOffset(bool pixel) {
+	if (pixel) 
+		return sf::Vector2i(offset.x * tileSize.x, offset.y * tileSize.y);
+	else
+		return offset;
+}
+
 void TiledMap::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	//apply the transform
 	states.transform *= getTransform();
@@ -114,6 +127,19 @@ bool PieceMap::update(const std::vector<Piece*> &pieces) {
 		}
 	}
 	return true;
+}
+
+unsigned int PieceMap::getWidth() {
+	return width;
+}
+unsigned int PieceMap::getHeight() {
+	return height;
+}
+sf::Vector2i PieceMap::getOffset(bool pixel) {
+	if (pixel) 
+		return sf::Vector2i(offset.x * tileSize.x, offset.y * tileSize.y);
+	else
+		return offset;
 }
 
 void PieceMap::draw(sf::RenderTarget& target, sf::RenderStates states) const {
