@@ -8,6 +8,18 @@
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(19 * 45, 12 * 45), "Chess vs Shogi");
+
+	//add a font
+	sf::Font font;
+	if(!font.loadFromFile("../resources/fonts/SawarabiMincho-Regular.ttf"))
+		return -1;
+	
+	//make some text
+	sf::Text text;
+	text.setFont(font);
+	text.setString(L"Hello かわいい");
+	text.setCharacterSize(26);
+	text.setFillColor(sf::Color::Black);
 	
 	//set a bool to redraw
 	bool redraw = true;
@@ -68,12 +80,12 @@ int main() {
 						sf::Vector2i localPosition = sf::Mouse::getPosition(window);
 						//get corresponding tile
 						sf::Vector2i tile = (localPosition - highMap.getOffset(true)) / 45;
-						std::cout << "Offset: " << highMap.getOffset(true).x << " " << highMap.getOffset(true).y << "\n";
 						//mock update (toggle between modes)
-						std::cout << "Width: " << highMap.getWidth() << "\n";
 						high[tile.x + tile.y * highMap.getWidth()] = "012"[((high[tile.x + tile.y * highMap.getWidth()] - '0') + 1) % 3];
 						//slate tilemaps to be updated
 						redraw = true;
+						//state what tile was updated
+						text.setString("(" + std::to_string(tile.x) + ", " + std::to_string(tile.y) + ")");
 					}
 					break;
 			}
@@ -91,6 +103,7 @@ int main() {
 		window.draw(bgMap);
 		window.draw(boardMap);
 		window.draw(highMap);
+		window.draw(text);
 		window.display();		
 	}
 
